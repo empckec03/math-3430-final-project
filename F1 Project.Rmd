@@ -9,22 +9,36 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
+```{r}
+library(readxl)
+library(tidyverse)
+library(ggplot2)
+library(dplyr)
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+results <- read_excel("Results.xlsx")
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+results
 
-```{r cars}
-summary(cars)
+weather <- read_excel("Weather.xlsx")
+
+weather
 ```
 
-## Including Plots
+```{r}
+results <- results %>%
+  select(TeamName, FullName, Position, GridPosition, Status, Points, RoundNumber, EventName) %>%
+  mutate(
+    Position = as.integer(Position),
+    GridPosition = as.integer(GridPosition),
+    Points = as.integer(Points),
+    RoundNumber = as.integer(RoundNumber)
+  ) %>%
+  rename (
+    DriverName = FullName,
+    Result = Position,
+    QualiPosition = GridPosition
+  )
+  
 
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
+results
 ```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
