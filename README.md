@@ -42,3 +42,5 @@ This is very simple and not at all properly formatted, but here's a simple descr
      git push origin
 
 For the sake of this class, I don't think we should worry about using branches at all since they will not be very helpful.
+
+After making the changes to the file, please make a pull request for the file (don't worry about the description field). For this, it should pop up on the main page of the repo after proposing changes to the file. It will be a button that says "Compare and pull request". This can also be viewed from the Pull Request tab at the top of the page for the repo. If y'all have any questions, feel free to ask at any time!
