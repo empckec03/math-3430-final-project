@@ -42,3 +42,11 @@ results <- results %>%
 
 results
 ```
+```{r}
+weather <- weather %>%
+  select(Rainfall, TrackTemp, RoundNumber, EventName) %>%
+  mutate(RoundNumber = as.integer(RoundNumber)) %>%
+  rename(Rain = Rainfall)
+
+weather
+```
