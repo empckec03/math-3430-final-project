@@ -69,3 +69,30 @@ rain_only <- weather %>%
 
 rain_only
 ```
+
+
+**Scatterplot of average track temp vs. total points scored by constructor.**
+```{r}
+results %>%
+  group_by(TeamName, EventName, RoundNumber) %>%
+  summarize(race_points = sum(Points), .groups = "drop") %>%
+  arrange(desc(race_points)) -> team_pts_by_race
+
+team_track <- team_pts_by_race %>%
+  left_join(track_only, by = c("EventName", "RoundNumber"))
+
+ggplot(data = team_track, aes(x = AvgTrackTemp, y = race_points, color = TeamName)) +
+  geom_point() +
+  labs(
+    x = "Average Track Temperature (°C)", 
+    y = "Constructor Points (Per Race)",
+    title = "Track Temperature vs Constructor Points"
+  ) +
+  facet_wrap(~TeamName, ncol = 5)
+```
+**Red Bull consistent (but with some outliers in higher temp)**
+**Mercedes, Ferrari all over the place- car upgrades after a bad race**
+**Hass, Alfa Romeo, Williams consistently bad (slightly better in the middle)**
+**Alpha Tauri, Mclaren better in higher temp**
+**Aston Martin more consistent in colder temps, scattered in higher temps**
+**Alpine did well in colder temps, consistent in higher temps (except for outlier)**
