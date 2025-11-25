@@ -50,3 +50,22 @@ weather <- weather %>%
 
 weather
 ```
+
+
+**The below section breaks the weather dataframe into 2 parts: track temperature and rainy races. The average track temperature for each race & round number is found. The number of races that had more than 10 true's under rain was also found.**
+```{r}
+track_only <- weather %>%
+  group_by(EventName, RoundNumber) %>%
+  summarize(AvgTrackTemp = mean(TrackTemp, na.rm=T)) %>%
+  arrange(desc(AvgTrackTemp))
+
+track_only
+
+
+rain_only <- weather %>%
+  group_by(EventName, RoundNumber) %>%
+  summarize(NumRain = sum(Rain)) %>%
+  filter(NumRain >= 10)
+
+rain_only
+```
