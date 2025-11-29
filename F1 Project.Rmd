@@ -96,3 +96,22 @@ ggplot(data = team_track, aes(x = AvgTrackTemp, y = race_points, color = TeamNam
 **Alpha Tauri, Mclaren better in higher temp**
 **Aston Martin more consistent in colder temps, scattered in higher temps**
 **Alpine did well in colder temps, consistent in higher temps (except for outlier)**
+
+
+
+```{r}
+results %>%
+  group_by(TeamName, EventName, RoundNumber, DriverName) %>%
+  summarize(race_points = sum(Points), .groups = "drop") %>%
+  arrange(desc(race_points)) -> pts_by_race
+
+individual_track <- pts_by_race %>%
+  left_join(track_only, by = c("EventName", "RoundNumber"))
+
+individual_track
+
+ggplot(data = individual_track, aes(x=race_points, fill=DriverName)) +
+  geom_bar() +
+  facet_wrap(~TeamName, ncol=5) +
+  theme(legend.position = "none")
+```
