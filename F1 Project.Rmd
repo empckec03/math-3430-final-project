@@ -1,6 +1,6 @@
 ---
 title: "F1 Project"
-author: "Hailey, Finn, Mia, Caili"
+author: "Hailey, Finn, Mia, Caeli"
 date: "2025-11-18"
 output: html_document
 ---
@@ -124,3 +124,42 @@ ggplot(data = individual_track, aes(x=race_points, fill=DriverName)) +
   facet_wrap(~TeamName, ncol=5) +
   theme(legend.position = "none")
 ```
+
+```{r}
+results_rain <- results %>%
+  left_join(
+    weather %>%
+      group_by(EventName, RoundNumber) %>%
+      summarize(
+        NumRainRaces = sum(Rain, na.rm = T),
+        RaceWeather = if_else(NumRainRaces > 0, "Rain", "No Rain"),
+        .groups = "drop"
+      ) %>%
+      mutate(
+        RaceWeather = factor(RaceWeather, levels = c("No Rain", "Rain"))
+      ),
+    by = c("EventName", "RoundNumber")
+  ) %>%
+  group_by(DriverName, RaceWeather) %>%
+  summarize(TotalPts = sum(Points, na.rm = T), .groups = "drop_last") %>%
+  mutate(DriverTotalPts = sum(TotalPts, na.rm = T)) %>%
+  ungroup() %>%
+  ggplot(aes(
+         x = reorder(DriverName, DriverTotalPts),
+         y = TotalPts,
+         fill = RaceWeather
+       )) + 
+  geom_bar(stat = "identity") +
+  coord_flip() +
+  labs(
+    x = "Driver",
+    y = "Total Points Scored (2023 Season)",
+    fill = "Race Weather",
+    title = "Driver Points for Rain vs No Rain Races"
+  ) +
+  theme_minimal()
+
+results_rain
+```
+
+**All drivers consistently scored higher when there was no rain during the race.**
