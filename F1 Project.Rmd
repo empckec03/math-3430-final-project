@@ -69,7 +69,16 @@ rain_only <- weather %>%
 
 rain_only
 ```
-
+**This is a bar graph of the average points scored per race for each driver during the '23 season. The bars are colored based on the team the driver drives for. It reveals that Max Verstappen has the highest average number of points scored each race and Sergio Perez had the second highest number of points scored each race. Both drivers race for Red Bull Racing. The plot reveals Verstappen and then Perez are the most consistent drivers and Red Bull Racing is the most consistent constructor. The least consistent drivers were Nyck De Vries (least reliable) and then Logan Sargeont. The least reliable constructors appear to be AlphaTauri, Haas, and Alfa Romeo.**
+```{r}
+results %>%
+  group_by(DriverName, TeamName) %>%
+  summarize(mean_pts_scored = mean(Points, na.rm = T), .groups = "drop") %>%
+  ggplot(aes(x = reorder(DriverName, mean_pts_scored), y = mean_pts_scored))+
+  geom_bar(stat = "identity", aes(color = TeamName, fill = TeamName))+
+  coord_flip() +
+  labs(y = "Mean Points Scored Per Race", x = "Driver Name", color = "Team Name", fill = "Team Name")
+```
 
 **Scatterplot of average track temp vs. total points scored by constructor.**
 ```{r}
