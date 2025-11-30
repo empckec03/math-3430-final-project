@@ -9,6 +9,7 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+**reading in the datasets**
 ```{r}
 library(readxl)
 library(tidyverse)
@@ -23,7 +24,7 @@ weather <- read_excel("Weather.xlsx")
 
 weather
 ```
-
+**tidying up results to include only what we need and fix data types & names**
 ```{r}
 results <- results %>%
   select(TeamName, FullName, Position, GridPosition, Status, Points, RoundNumber, EventName) %>%
@@ -38,10 +39,10 @@ results <- results %>%
     Result = Position,
     QualiPosition = GridPosition
   )
-  
 
 results
 ```
+**tidying up weather to include only the columns we need and fixing data types**
 ```{r}
 weather <- weather %>%
   select(Rainfall, TrackTemp, RoundNumber, EventName) %>%
@@ -99,12 +100,8 @@ ggplot(data = team_track, aes(x = AvgTrackTemp, y = race_points, color = TeamNam
   ) +
   facet_wrap(~TeamName, ncol = 5)
 ```
-**Red Bull consistent (but with some outliers in higher temp)**
-**Mercedes, Ferrari all over the place- car upgrades after a bad race**
-**Hass, Alfa Romeo, Williams consistently bad (slightly better in the middle)**
-**Alpha Tauri, Mclaren better in higher temp**
-**Aston Martin more consistent in colder temps, scattered in higher temps**
-**Alpine did well in colder temps, consistent in higher temps (except for outlier)**
+**Red Bull consistent (but with some outliers in higher temp). Mercedes, Ferrari all over the place. Hass, Alfa Romeo, Williams** **consistently bad (slightly better in the middle). Alpha Tauri, Mclaren better in higher temp. Aston Martin more consistent in** 
+colder temps, scattered in higher temps. Alpine did well in colder temps, consistent in higher temps (except for outlier)**
 
 
 
