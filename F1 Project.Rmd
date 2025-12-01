@@ -17,13 +17,12 @@ library(ggplot2)
 library(dplyr)
 
 results <- read_excel("Results.xlsx")
-
 results
 
 weather <- read_excel("Weather.xlsx")
-
 weather
 ```
+
 **tidying up results to include only what we need and fix data types & names**
 ```{r}
 results <- results %>%
@@ -39,8 +38,8 @@ results <- results %>%
     Result = Position,
     QualiPosition = GridPosition
   )
-
 results
+
 ```
 **tidying up weather to include only the columns we need and fixing data types**
 ```{r}
@@ -48,10 +47,8 @@ weather <- weather %>%
   select(Rainfall, TrackTemp, RoundNumber, EventName) %>%
   mutate(RoundNumber = as.integer(RoundNumber)) %>%
   rename(Rain = Rainfall)
-
 weather
 ```
-
 
 **The below section breaks the weather dataframe into 2 parts: track temperature and rainy races. The average track temperature for each race & round number is found. The number of races that had more than 10 true's under rain was also found.**
 ```{r}
@@ -61,7 +58,6 @@ track_only <- weather %>%
   arrange(desc(AvgTrackTemp))
 
 track_only
-
 
 rain_only <- weather %>%
   group_by(EventName, RoundNumber) %>%
@@ -90,6 +86,7 @@ results %>%
 
 team_track <- team_pts_by_race %>%
   left_join(track_only, by = c("EventName", "RoundNumber"))
+team_track
 
 ggplot(data = team_track, aes(x = AvgTrackTemp, y = race_points, color = TeamName)) +
   geom_point() +
@@ -102,7 +99,6 @@ ggplot(data = team_track, aes(x = AvgTrackTemp, y = race_points, color = TeamNam
 ```
 **Red Bull consistent (but with some outliers in higher temp). Mercedes, Ferrari all over the place. Hass, Alfa Romeo, Williams** **consistently bad (slightly better in the middle). Alpha Tauri, Mclaren better in higher temp. Aston Martin more consistent in** 
 colder temps, scattered in higher temps. Alpine did well in colder temps, consistent in higher temps (except for outlier)**
-
 
 
 ```{r}
