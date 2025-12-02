@@ -17,10 +17,8 @@ library(ggplot2)
 library(dplyr)
 
 results <- read_excel("Results.xlsx")
-results
 
 weather <- read_excel("Weather.xlsx")
-weather
 ```
 
 **tidying up results to include only what we need and fix data types & names**
