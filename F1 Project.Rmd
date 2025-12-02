@@ -4,7 +4,7 @@ author: "Hailey, Finn, Mia, Caeli"
 date: "2025-11-18"
 output: html_document
 ---
-
+**Our project attempted to see if weather (track temperature and rain) had an affect on driver and constructor performance in Formula 1 during the 2023 season. We tidied up both the weather and results datasets and made various visualizations. We planned to make a bar graph of average points scored per race by each driver, a scatter plot of average track temperature vs. points scored by each constructor each race but we decided to facet it as well to see trends easier, a faceted stacked bar graph of points scored each race colored by driver and faceted by constructor, and a stacked bar graph of total points scored by each driver with it colored by which points were scored in a rain race vs non rain race. We were successful in making these visualizations and we learned that Max Verstappen was the most consistent driver, regardless of weather conditions, and Red Bull was the most consistent constructor in all weather conditions. Performance of the cars in different track temperature does vary between constructors, with Red Bull doing well in all track temperatures. Performance of the cars may also vary due to upgrades added throughout the season. In teams like Red Bull, there is one driver scored the bulk of the team's points but in other teams, it was more equal. **
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
@@ -66,7 +66,7 @@ rain_only <- weather %>%
 
 rain_only
 ```
-**This is a bar graph of the average points scored per race for each driver during the '23 season. The bars are colored based on the team the driver drives for. It reveals that Max Verstappen has the highest average number of points scored each race and Sergio Perez had the second highest number of points scored each race. Both drivers race for Red Bull Racing. The plot reveals Verstappen and then Perez are the most consistent drivers and Red Bull Racing is the most consistent constructor. The least consistent drivers were Nyck De Vries (least reliable) and then Logan Sargeont. The least reliable constructors appear to be AlphaTauri, Haas, and Alfa Romeo.**
+**This is a bar graph of the average points scored per race for each driver, with the bars colored by constructor. It reveals that Max Verstappen has the highest average number of points scored each race and Sergio Perez had the second highest amount. The plot reveals Verstappen and then Perez are the most consistent drivers and Red Bull Racing is the most consistent constructor when looking at the season as a whole. The least consistent drivers were Nyck De Vries (averages 0 pts per race) and then Logan Sargeant. The least consistent constructors appear to be AlphaTauri, Haas, and Alfa Romeo.**
 ```{r}
 results %>%
   group_by(DriverName, TeamName) %>%
