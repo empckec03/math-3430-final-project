@@ -66,7 +66,7 @@ rain_only <- weather %>%
 
 rain_only
 ```
-**This is a bar graph of the average points scored per race for each driver, with the bars colored by constructor. It reveals that Max Verstappen has the highest average number of points scored each race and Sergio Perez had the second highest amount. The plot reveals Verstappen and then Perez are the most consistent drivers and Red Bull Racing is the most consistent constructor when looking at the season as a whole. The least consistent drivers were Nyck De Vries (averages 0 pts per race) and then Logan Sargeant. The least consistent constructors appear to be AlphaTauri, Haas, and Alfa Romeo.**
+**This is a bar graph of the mean points scored per race for each driver, with the bars colored by constructor. It reveals that Max Verstappen has the highest mean number of points scored each race and Sergio Perez had the second highest amount. The plot reveals Verstappen and then Perez are the drivers that consistently score the most points and Red Bull Racing is the most consistent constructor when looking at the season as a whole. The drivers, Nyck De Vries and Logan Sargeant, and the constructors of AlphaTauri, Haas, and Alfa Romeo consistently score the least amount of points. **
 ```{r}
 results %>%
   group_by(DriverName, TeamName) %>%
