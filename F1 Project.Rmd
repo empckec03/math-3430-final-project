@@ -98,7 +98,7 @@ ggplot(data = team_track, aes(x = AvgTrackTemp, y = race_points, color = TeamNam
 **Red Bull consistent (but with some outliers in higher temp). Mercedes, Ferrari all over the place. Hass, Alfa Romeo, Williams** **consistently bad (slightly better in the middle). Alpha Tauri, Mclaren better in higher temp. Aston Martin more consistent in** 
 colder temps, scattered in higher temps. Alpine did well in colder temps, consistent in higher temps (except for outlier)**
 
-
+**Below is a group of bar plots, broken up by constructor. Each graph is color coded according to the driver that scored the points shown for their constructor.**
 ```{r}
 results %>%
   group_by(TeamName, EventName, RoundNumber, DriverName) %>%
@@ -115,6 +115,7 @@ ggplot(data = individual_track, aes(x=race_points, fill=DriverName)) +
   facet_wrap(~TeamName, ncol=5) +
   theme(legend.position = "none")
 ```
+**These graphs show many things. Many teams were very spread out with how many points they scored per race, such as Red Bull or Ferrari. Other teams were highly concentrated in the low point range, such as Williams or Alfa Romeo. There were no teams that were highly concentrated in the high point range. One Red Bull driver (Max Verstappen) consistently outscored the other Red Bull driver (Sergio Perez).**
 
 **The following is a bar graph detailing the total points scored by each driver for rainy vs dry races during the '23 season. In the case of the current dataset, there were only three rainy races, so there was a limited amount of data points to work with.**
 ```{r}
